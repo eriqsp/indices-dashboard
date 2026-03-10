@@ -50,11 +50,12 @@ if st.session_state.dark_mode:
                 border-collapse: collapse;
             }
             .summary-table {
-                max-width: 980px;
+                max-width: 1180px;
                 margin: 0 auto;
+                font-size: 1.5rem;
             }
             .summary-table th, .summary-table td {
-                padding: 0.45rem 0.6rem;
+                padding: 0.6rem 0.8rem;
                 border: 1px solid #2a2f3a;
                 text-align: left;
             }
@@ -96,11 +97,12 @@ else:
                 border-collapse: collapse;
             }
             .summary-table {
-                max-width: 980px;
+                max-width: 1180px;
                 margin: 0 auto;
+                font-size: 1.5rem;
             }
             .summary-table th, .summary-table td {
-                padding: 0.45rem 0.6rem;
+                padding: 0.6rem 0.8rem;
                 border: 1px solid #d9dde7;
                 text-align: left;
             }
@@ -117,7 +119,8 @@ symbols = {
     'USDBRL': 'USDBRL=X',
     'Bitcoin': 'BTC-USD',
     'Gold': 'GC=F',
-    'Ibovespa': '^BVSP'
+    'Ibovespa': '^BVSP',
+    'S&P 500': '^GSPC'
 }
 
 # Function to get data
@@ -182,22 +185,35 @@ with center_col:
     plot_cols = st.columns(2)
     for i, (name, close_series) in enumerate(plot_data):
         with plot_cols[i % 2]:
-            st.markdown(f"**{name} Price Over Time**")
+            st.markdown(f"<div style='font-size: 1.4rem; font-weight: 700; margin-bottom: 0.35rem;'>{name}</div>", unsafe_allow_html=True)
             chart_df = close_series.reset_index()
             chart_df.columns = ["Date", "Price"]
             chart = (
                 alt.Chart(chart_df)
                 .mark_line(color=chart_line)
                 .encode(
-                    x=alt.X("Date:T", title="Date"),
-                    y=alt.Y("Price:Q", title="Price"),
+                    x=alt.X("Date:T", title=None),
+                    y=alt.Y("Price:Q", title=None),
+                    tooltip=[
+                        alt.Tooltip("Date:T", title="Date"),
+                        alt.Tooltip("Price:Q", title="Price", format=".2f"),
+                    ],
                 )
                 .properties(height=420, background=chart_bg)
+                .interactive()
                 .configure_view(strokeOpacity=0)
                 .configure_axis(
                     labelColor=chart_text,
                     titleColor=chart_text,
                     gridColor=chart_grid,
+                    labelFontSize=16,
+                    titleFontSize=16,
+                )
+                .configure_legend(
+                    labelFontSize=16,
+                    titleFontSize=16,
+                    labelColor=chart_text,
+                    titleColor=chart_text,
                 )
             )
             st.altair_chart(chart, use_container_width=True)
