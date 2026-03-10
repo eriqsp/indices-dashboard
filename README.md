@@ -1,10 +1,8 @@
-<video src="dashboard_example.mp4" controls width="100%"></video>
-
-If the embedded video does not render, open [dashboard_example.mp4](dashboard_example.mp4).
-
 # Dashboard Indices
 
+![Dashboard preview](files/dashboard_example.png)
 
+Watch the demo video: [dashboard_example.mp4](files/dashboard_example.mp4)
 
 A compact Streamlit market dashboard that tracks a small set of assets and indexes in one screen. It fetches data from Yahoo Finance, summarizes current performance, and renders interactive price charts with a light/dark mode toggle.
 
@@ -54,6 +52,9 @@ Streamlit will print a local URL in the terminal, typically `http://localhost:85
 ```text
 .
 |-- dashboard.py
+|-- files/
+|   |-- dashboard_example.mp4
+|   `-- dashboard_example.png
 |-- requirements.txt
 |-- README.md
 ```
