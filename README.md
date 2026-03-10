@@ -2,8 +2,6 @@
 
 ![Dashboard preview](files/dashboard_example.png)
 
-Watch the demo video: [dashboard_example.mp4](files/dashboard_example.mp4)
-
 A compact Streamlit market dashboard that tracks a small set of assets and indexes in one screen. It fetches data from Yahoo Finance, summarizes current performance, and renders interactive price charts with a light/dark mode toggle.
 
 ## What it shows
